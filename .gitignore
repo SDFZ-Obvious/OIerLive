@@ -1,0 +1,5 @@
+front/node_modules/
+front/live/*
+
+back/src/node_modules/
+back/.env

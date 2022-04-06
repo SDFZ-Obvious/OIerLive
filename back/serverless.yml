@@ -1,0 +1,37 @@
+app: live
+
+component: scf
+name: oierlive
+
+inputs:
+  src: ./src
+  handler: index.main_handler
+  runtime: Nodejs12.16
+  region: ap-shanghai
+  # 部署目标地区。 更多参考 https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8
+  # 建议填 ap-shanghai 或者 ap-guangzhou
+  events:
+    - apigw:
+        parameters:
+          endpoints:
+            - path: /post
+              method: POST
+              function:
+                functionQualifier: $LATEST
+                isIntegratedResponse: true
+    - apigw:
+        parameters:
+          endpoints:
+            - path: /live
+              method: GET
+              function:
+                functionQualifier: $LATEST
+                isIntegratedResponse: true
+    - apigw:
+        parameters:
+          endpoints:
+            - path: /image
+              method: GET
+              function:
+                functionQualifier: $LATEST
+                isIntegratedResponse: true
