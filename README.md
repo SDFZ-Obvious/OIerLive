@@ -66,7 +66,7 @@
 
 6. 修改并确认无误后，执行如下命令来部署腾讯云函数。
   ```
-  > sls deploy
+  > serverless deploy
   serverless ⚡tencent
   Action: "deploy" - Stage: "dev" - App: "live" - Name: "oierlive"
   0s»oierlive» 部署中 ...
