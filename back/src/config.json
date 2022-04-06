@@ -1,6 +1,6 @@
 {
     "password": "password",
-    "interval": "3000",
+    "interval": "5000",
     "expire": "10000",
     "offline": "主播正在划水"
 }
