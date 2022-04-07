@@ -1,6 +1,7 @@
 const fs = require("fs"),
     path = require("path"),
     qs = require("qs"),
+    marked = require("marked"),
     render = require("./render.js"),
     util = require("./util.js");
 let image;
@@ -27,18 +28,22 @@ const post = (context) => {
 };
 
 const img = () => {
+    let display = image;
     if (!note) note = "暂无笔记";
     if (new Date().getTime() - lastupdate >= util.read_config().expire) {
-        image = "offline";
+        display = "offline";
     } else {
-        if (!image) image = "";
+        if (!image) display = "";
     }
     
     return {
         isBase64Encoded: false,
         statusCode: 200,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({"note": note, "image": image})
+        body: JSON.stringify({"t1": lastupdate,
+            "t2": new Date().getTime(),
+            "flag": new Date().getTime() - lastupdate >= util.read_config().expire,
+            "note": note, "image": display})
     };
 };
 
@@ -48,7 +53,7 @@ const live = async () => {
     })
     html = render(html, {
         imagedata: image,
-        notedata: note,
+        notedata: marked.marked(decodeURI(note)),
         interval: util.read_config().interval,
         offline: util.read_config().offline
     });
@@ -62,7 +67,7 @@ const live = async () => {
 
 exports.main_handler = async (event, context, callback) => {
     await util.load_config();
-    console.log(event)
+    console.log(lastupdate, new Date().getTime(), image === "offline");
     const request_path = event["path"];
     if (request_path === "/post") {
         return post(qs.parse(event["body"]));

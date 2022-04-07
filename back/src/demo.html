@@ -220,7 +220,7 @@
                         $("#offline").attr("display", "none");
                         $("#player").attr("display", "block");
                         $("#player").attr("src", `data:image/jpg;base64,${ data.image }`)
-                        $("#notice").text(data.note)
+                        $("#notice").text(marked(decodeURI(data.note)))
                     }
                 },
                 error: function (data, status) {

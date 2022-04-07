@@ -36,6 +36,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+marked@^4.0.12:
+  version "4.0.12"
+  resolved "https://registry.npmmirror.com/marked/-/marked-4.0.12.tgz#2262a4e6fd1afd2f13557726238b69a48b982f7d"
+  integrity sha512-hgibXWrEDNBWgGiK18j/4lkS6ihTe9sxtV4Q1OQppb/0zzyPSzoFANBa5MfsG/zgsWklmNnhm0XACZOH/0HBiQ==
+
 object-inspect@^1.9.0:
   version "1.12.0"
   resolved "http://gz.npm.tencentyun.com/npm/object-inspect/-/object-inspect-1.12.0.tgz#6e2c120e868fd1fd18cb4f18c31741d0d6e776f0"

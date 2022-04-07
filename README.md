@@ -46,7 +46,8 @@
 
 3. 在搭建前端时 clone 的本仓库目录下，执行如下指令：
   ```
-  cd back
+  cd back/src
+  yarn
   ```
 
 4. （可选）修改  `serverless.yml`。
