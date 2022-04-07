@@ -1,12 +1,12 @@
 const fs = require("fs/promises"),
     path = require("path"),
-    screenshot = require("desktop-screenshot"),
+    screenshot = require("screenshot-desktop"),
     util = require("./util.js"),
     request = require("./request.js");
 
 const shot = async () => {
     util.log("Screenshoting...");
-    screenshot(__dirname + "/live/screenshot.jpg", {width: 1920, height: 1080, quality: 60});
+    await screenshot({ filename: __dirname + "/live/screenshot.jpg" });
     const image_data = (await fs.readFile(__dirname + "/live/screenshot.jpg")).toString("base64");
     const note = (await fs.readFile(__dirname + "/live/note.txt", encoding = "utf-8"));
     util.log("Syncing data...");
