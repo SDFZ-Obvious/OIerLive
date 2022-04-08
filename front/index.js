@@ -10,7 +10,6 @@ const shot = async () => {
     const image_data = (await fs.readFile(__dirname + "/live/screenshot.jpg")).toString("base64");
     const note = (await fs.readFile(__dirname + "/live/note.txt", encoding = "utf-8"));
     util.log("Syncing data...");
-    util.log(note);
     await request.post({ password: util.read_config().password, image: image_data, text: note});
 }
 

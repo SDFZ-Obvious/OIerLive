@@ -29,144 +29,16 @@
   {
       "password": "你的密码（应与后端密码一致）",
       "interval": "更新画面的间隔（单位：ms）",
-      "server": "云函数 post 方法地址（后文会讲到）"
+      "server": "post 方法地址（后文会讲到）"
   }
   ```
 
 ## 后端搭建教程
 
-为了减少用户开支，我们使用腾讯云函数计算作为后端，每月有 100 万次调用的免费额度。
-
-1. 注册 [腾讯云](https://cloud.tencent.com/) 账号。
-
-2. 安装腾讯云函数依赖。
-  ```
-  npm install -g serverless
-  ```
-
-3. 在搭建前端时 clone 的本仓库目录下，执行如下指令：
-  ```
-  cd back/src
-  yarn
-  ```
-
-4. （可选）修改  `serverless.yml`。
-
-   - `region: ap-shanghai` 为云函数部署的目标地区。可修改为 `ap-guangzhou` 等其他地区，详见 [腾讯云官方文档](https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8)。
-   - 其他内容不建议修改，除非你知道自己在做什么。
-
-5. 修改 `config.json`。
-  ```
-  {
-      "password": "你的密码（应与前端密码一致）",
-      "interval": "更新画面的间隔（单位：ms）",
-      "expire": "判定下线的时间（单位：ms）",
-      "offline": "断线时的信息"
-  }
-  ```
-
-6. 修改并确认无误后，执行如下命令来部署腾讯云函数。
-  ```
-  > serverless deploy
-  serverless ⚡tencent
-  Action: "deploy" - Stage: "dev" - App: "live" - Name: "oierlive"
-  0s»oierlive» 部署中 ...
-  ```
-
-  此时可能会让你登录腾讯云账户，可以扫描二维码登录，也可以访问底下的链接登陆。
-
-  部署成功后，会看到如下信息：
-
-  ```
-  type:         event
-  functionName: oierlive-dev-live
-  code:
-    bucket: sls-cloudfunction-ap-shanghai-code
-    object: /scf_component_rw6ykyk-1649163434.zip
-  description:  This is a function in live application
-  namespace:    default
-  runtime:      Nodejs12.16
-  handler:      index.main_handler
-  memorySize:   128
-  lastVersion:  $LATEST
-  traffic:      1
-  triggers:
-    -
-      NeedCreate:  true
-      created:     true
-      serviceId:   service-65f7tzkx
-      serviceName: serverless
-      subDomain:   service-65f7tzkx-1305163805.sh.apigw.tencentcs.com
-      protocols:   http
-      environment: release
-      apiList:
-        -
-          path:            /post
-          method:          POST
-          apiName:         index
-          created:         true
-          authType:        NONE
-          businessType:    NORMAL
-          isBase64Encoded: false
-          apiId:           api-84rbjcx3
-          internalDomain:
-          url:             http://service-65f7tzkx-1305163805.sh.apigw.tencentcs.com/release/post
-      url:         http://service-65f7tzkx-1305163805.sh.apigw.tencentcs.com
-      urls:
-        - http://service-65f7tzkx-1305163805.sh.apigw.tencentcs.com/release/post
-    -
-      NeedCreate:  true
-      created:     true
-      serviceId:   service-65f7tzkx
-      serviceName: serverless
-      subDomain:   service-65f7tzkx-1305163805.sh.apigw.tencentcs.com
-      protocols:   http
-      environment: release
-      apiList:
-        -
-          path:            /live
-          method:          GET
-          apiName:         index
-          created:         true
-          authType:        NONE
-          businessType:    NORMAL
-          isBase64Encoded: false
-          apiId:           api-dhmqd3ah
-          internalDomain:
-          url:             http://service-65f7tzkx-1305163805.sh.apigw.tencentcs.com/release/live
-      url:         http://service-65f7tzkx-1305163805.sh.apigw.tencentcs.com
-      urls:
-        - http://service-65f7tzkx-1305163805.sh.apigw.tencentcs.com/release/live
-    -
-      NeedCreate:  true
-      created:     true
-      serviceId:   service-65f7tzkx
-      serviceName: serverless
-      subDomain:   service-65f7tzkx-1305163805.sh.apigw.tencentcs.com
-      protocols:   http
-      environment: release
-      apiList:
-        -
-          path:            /image
-          method:          GET
-          apiName:         index
-          created:         true
-          authType:        NONE
-          businessType:    NORMAL
-          isBase64Encoded: false
-          apiId:           api-3bp3rvvn
-          internalDomain:
-          url:             http://service-65f7tzkx-1305163805.sh.apigw.tencentcs.com/release/image
-      url:         http://service-65f7tzkx-1305163805.sh.apigw.tencentcs.com
-      urls:
-        - http://service-65f7tzkx-1305163805.sh.apigw.tencentcs.com/release/image
-  
-  应用控制台: https://serverless.cloud.tencent.com/apps/live/oierlive/dev
-  
-  33s »oierlive» 执行成功
-  ```
-
-   此时， `triggers` 的第一项就是 `post` 的 API 网关。它的 `apiList - url` 即为前端搭建教程中的 `云函数 post 方法地址`，在本例中为 `http://service-65f7tzkx-1305163805.sh.apigw.tencentcs.com/release/post`。
+| 后端 | 优点 | 缺点 | 部署教程 |
+| :-----------: | :-----------: | :-----------: | :-----------: |
+| Tencent SCF | 命令行一键部署，速度快，多文件代码易懂 | 价格贵 | [here](/back/tencentSCF/README.md) |
+| Cloudflare Worker | 绑定数据库部署复杂，单文件代码不易读 | 每天十万次免费调用额度 | [here](/back/cloudflareWorker/README.md) |
 
 # 使用教程
 
@@ -182,15 +54,33 @@ Syncing data...
 Received response!
 ```
 
-此时，可以访问 `triggers` 的第二项 `live` 来进入屏幕分享页面，在本例中为 `http://service-65f7tzkx-1305163805.sh.apigw.tencentcs.com/release/live`。
+对于腾讯云函数，可以访问 `triggers` 的第二项 `live` 来进入屏幕分享页面，在本例中为 `http://service-65f7tzkx-1305163805.sh.apigw.tencentcs.com/release/live`。
 
-通过修改 `front/live/note.txt` 可以同步做题笔记，支持 HTML 语法。
+对于 cloudflare worker，可以访问 `Workers` 地址后面加 `/live` 来进入屏幕分享页面，在本例中为 `https://live.op2.workers.dev/live`。
+
+通过修改 `front/live/note.txt` 可以同步做题笔记，支持 markdown 语法。
 
 若要停止屏幕分享，关闭执行过 `npm run start` 的终端即可。
 
+# 更新教程
+在命令行中执行如下命令.
+```
+git pull
+```
+若更新了前端，直接重启即可。
+若更新了后端，使用对应的部署方式即可。
+```
+# cloudflare
+wrangler publish
+# tencent
+serverless deploy
+```
+
 # 绑定域名
 
-腾讯云函数的默认域名太长，若要绑定域名，可以在 [腾讯云函数控制台](https://console.cloud.tencent.com/scf/list) 中操作，也可以解析到云函数，未来也可能实现将屏幕分享域名与 [OIerSpace](https://oier.space) 开通了 Pro Plan 的个人博客绑定。
+腾讯云函数的默认域名太长，若要绑定域名，可以在 [腾讯云函数控制台](https://console.cloud.tencent.com/scf/list) 中操作，也可以解析到云函数。
+Cloudflare Worker 可以在 Cloudflare dash 中绑定域名，也可以解析到 `Worker`。
+未来也可能实现将屏幕分享域名与 [OIerSpace](https://oier.space) 开通了 Pro Plan 的个人博客绑定。
 
 # 问题反馈
 

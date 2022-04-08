@@ -1,0 +1,20 @@
+{
+  "name": "oierlive-back-cf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/optimize-2/OIerLive.git"
+  },
+  "keywords": [
+    "oi",
+    "live"
+  ],
+  "author": "optimize-2",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/optimize-2/OIerLive/issues"
+  },
+  "homepage": "https://github.com/optimize-2/OIerLive#readme"
+}

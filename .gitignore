@@ -1,4 +1,5 @@
 front/node_modules/
+front/test.js
 
-back/src/node_modules/
-back/.env
+back/tencentSCF/src/node_modules/
+back/tencentSCF/.env
