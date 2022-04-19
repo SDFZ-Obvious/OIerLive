@@ -9,10 +9,11 @@ exports.post = async (data) => {
         method: "POST",
         url: util.read_config().server,
         headers: head,
-        data: (util.read_config().server.split("/")[2].endsWith("workers.dev") !== -1 ? data : qs.stringify(data))
+        data: (util.read_config().server.split("/")[2].endsWith("workers.dev") ? data : qs.stringify(data))
     }).then((res) => {
         util.log("Received response!");
     }).catch((err) => {
+        console.log(err);
         util.log("Can't connect to the server!")
     });
 };

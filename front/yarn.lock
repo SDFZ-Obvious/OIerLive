@@ -83,6 +83,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+images@^3.1.0:
+  version "3.2.4"
+  resolved "https://registry.npmmirror.com/images/-/images-3.2.4.tgz#18191d88c7d2a06f772b669a1b3d7d09613fc55b"
+  integrity sha512-Uq61/Q8XixCRyKvws7tPwboK0O70Dbr4kMQZHw2dqdEhnU6TpaGwyMg0vzQ4aaGtrO9N3etq46XwF7hxbqp8ug==
+
 inflight@^1.0.4:
   version "1.0.6"
   resolved "https://registry.npmmirror.com/inflight/-/inflight-1.0.6.tgz#49bd6331d7d02d0c09bc910a1075ba8165b56df9"

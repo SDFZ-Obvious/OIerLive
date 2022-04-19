@@ -2,7 +2,9 @@ const config = {
     "password": "password",
     "interval": "5000",
     "expire": "30000",
-    "offline": "主播正在划水"
+    "offline": "主播正在划水",
+    "title": "A Live Streaming Platform for OIers | OIer Live",
+    "chatroom": "https://hack.chat/?OIerLive"
 };
 
 addEventListener("fetch", (event) => {
@@ -20,7 +22,7 @@ const html = `
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>A Live Streaming Platform for OIers | OIer Live</title>
+    <title>\${title}</title>
     <style>
         html, body {
             width: 100%;
@@ -172,11 +174,11 @@ const html = `
             }
         }
         
-        .banners {
+        .chatroom {
             margin-top: .7em;
         }
 
-        .banner-item {
+        .chatroom-item {
             width: 100%;
             border-radius: 1em;
             box-sizing: border-box;
@@ -189,6 +191,39 @@ const html = `
             top: 50%;
             transform: translateY(-50%);
             text-align: center;
+        }
+
+        #chat {
+            width: 100%;
+            border-radius: 1em;
+            margin-top: .7em;
+            border: none;
+            box-sizing: border-box;
+            box-shadow: 0 .1em .4em #e3e2e3;
+        }
+
+        footer {
+            background-color: #f4f3f4;
+            height: 6em;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            margin-top: 1.8em;
+            padding: 1.6em 0;
+            box-sizing: border-box;
+            box-shadow: 0 -.1em .4em #e3e2e3;
+        }
+
+        @media only screen and (max-height: 940px) {
+            footer {
+                position: relative;
+            }
+        }
+        
+        @media only screen and (max-width: 880px) {
+            footer {
+                position: fixed;
+            }
         }
     </style>
 </head>
@@ -216,12 +251,17 @@ const html = `
                 <h1 id="offline"> \${offline} </h1>
             </main>
         </section>
-        <section class="banners">
-            <a class="banner" href="https://oier.space/" target="_blank">
-                <img class="banner-item" src="https://s1.ax1x.com/2022/04/06/qXXo4K.png" alt="免费创建博客 - OIer Space" title="免费创建博客 - OIer Space">
-            </a>
+        </section>
+        <section class="chatroom">
+            <iframe id="chat" src="\${chatroom}"></iframe>
         </section>
     </div>
+    <footer>
+        <div class="container">
+            Powerer by <a href="https://github.com/optimize-2/OIerLive">OIerLive</a>.<br>
+            Made with ♥ by exlg-dev &amp; Piterator.
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/gh/markedjs/marked@2.0.1/marked.min.js"></script>
     <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"></script>
     <script>
@@ -313,7 +353,9 @@ async function handleRequest(request) {
             imagedata: await OIERLIVE.get("image"),
             notedata: btoa(encodeURI(await OIERLIVE.get("note"))),
             interval: config.interval,
-            offline: config.offline
+            offline: config.offline,
+            chatroom: config.chatroom,
+            title: config.title
         });
         return new Response(res, {
             headers: { "Content-Type": "text/html" },

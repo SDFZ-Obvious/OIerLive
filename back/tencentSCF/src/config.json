@@ -2,5 +2,7 @@
     "password": "password",
     "interval": "5000",
     "expire": "30000",
-    "offline": "主播正在划水"
+    "offline": "主播正在划水",
+    "title": "A Live Streaming Platform for OIers | OIer Live",
+    "chatroom": "https://hack.chat/?OIerLive"
 }

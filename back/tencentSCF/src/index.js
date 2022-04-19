@@ -55,7 +55,9 @@ const live = async () => {
         imagedata: image,
         notedata: marked.marked(decodeURI(note)),
         interval: util.read_config().interval,
-        offline: util.read_config().offline
+        offline: util.read_config().offline,
+        chatroom: util.read_config().chatroom,
+        title: util.read_config().title
     });
     return {
         isBase64Encoded: false,

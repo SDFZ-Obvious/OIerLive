@@ -34,7 +34,9 @@ cargo install wrangler
       "password": "你的密码（应与前端密码一致）",
       "interval": "更新画面的间隔（单位：ms）",
       "expire": "判定下线的时间（单位：ms）",
-      "offline": "断线时的信息"
+      "offline": "断线时的信息",
+      "chatroom": "聊天室的地址",
+      "title": "标题"
   }
   ```
 
