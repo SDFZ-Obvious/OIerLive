@@ -80,4 +80,5 @@ exports.main_handler = async (event, context, callback) => {
     if (request_path === "/live") {
         return live();
     }
+    return live();
 };
