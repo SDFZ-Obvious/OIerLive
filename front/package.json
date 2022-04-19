@@ -1,6 +1,6 @@
 {
   "name": "oierlive-front",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "某大型线上网络游戏防划水神器",
   "main": "index.js",
   "scripts": {
