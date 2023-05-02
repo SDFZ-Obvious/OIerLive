@@ -258,7 +258,7 @@ const html = `
     </div>
     <footer>
         <div class="container">
-            Powerer by <a href="https://github.com/optimize-2/OIerLive">OIerLive</a>.<br>
+            Powerer by <a href="https://github.com/sdfzyanxinyi/OIerLive">OIerLive</a>.<br>
             Made with ♥ by exlg-dev &amp; Piterator.
         </div>
     </footer>
